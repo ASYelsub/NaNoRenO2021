@@ -1,53 +1,85 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SidePanelControl : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject[] leftChatButton;
     [SerializeField]
     private GameObject coverPanel;
-    [SerializeField]
-    private GameObject[] chatButtons;
-    //both of these are length of chatButtons
-    private bool[] chatButtonVisible;
-    private bool[] chatButtonNewMessage;
-    private float[] topOfCoverPanel;
-    private float[] bottomOfCoverPanel;
+    int leftChatState;
+    RectTransform rt;
 
-    private float posXOfChatButtonOn = 0.50002f;
-    private float posXOfChatButtonOff = -271.4999f;
-
-    private float widthOfCoverPanelOn = 544f;
-    private float widthOfCoverPanelOff = 0f;
-
-    public static int gameState = 0;
-
-
-    void Start()
+   
+    private bool chatIsOpening;
+    private void Start()
     {
-        topOfCoverPanel[0] = -1.522526f;
-        topOfCoverPanel[1] = 134f;
-        bottomOfCoverPanel[0] = 1f;
-        bottomOfCoverPanel[1] = 0.04997257f;
-
-        for(int i = 0; i < chatButtons.Length; i++)
+        chatIsOpening = false;
+        leftChatState = 0;
+        for (int i = 0; i < leftChatButton.Length; i++)
         {
-            chatButtonVisible[i] = false;
-            chatButtonNewMessage[i] = false;
+            leftChatButton[i].SetActive(false);
         }
-        StartCoroutine(moveDownPanel(0, 1));
     }
 
-    private IEnumerator moveDownPanel(int firstPoint, int secondPoint)
+    private void Update()
     {
-        float timer = 0;
-        while (timer < 1)
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            
-            timer = timer + .001f;
+            if(leftChatState < leftChatButton.Length && !chatIsOpening)
+            StartCoroutine(addLeftChat(leftChatState));
+        }
+    }
+
+    private IEnumerator addLeftChat(int activatingThis)
+    {
+        chatIsOpening = true;
+        
+        float timer2 = 0;
+        RectTransform rt2 = coverPanel.GetComponent<RectTransform>();
+        Vector2 size2 = new Vector2(rt2.sizeDelta.x, rt2.sizeDelta.y);
+
+
+        while (timer2 < 1)
+        {
+            if (activatingThis == 0)
+            {
+                coverPanel.GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(size2, new Vector2(size2.x, size2.y - 140), timer2);
+            }
+            else
+            {
+                coverPanel.GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(size2, new Vector2(size2.x, size2.y - 80), timer2);
+            }
+            timer2 = timer2 + .01f;
             yield return null;
         }
-        yield return null;
-    } 
 
+
+        leftChatButton[activatingThis].SetActive(true);
+        float timer = 0;
+        rt = leftChatButton[activatingThis].GetComponent<RectTransform>();
+        Vector2 size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
+
+
+
+        Text activeText = rt.gameObject.GetComponentInChildren<Text>();
+        string savedText = activeText.text;
+        activeText.text = "";
+
+        while (timer < 1)
+        {
+            // TODO: come back to figuring out how to expand from left
+            leftChatButton[activatingThis].GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(new Vector2(0,rt.sizeDelta.y),size, timer);
+            timer = timer + .01f;
+            yield return null;
+        }
+
+        leftChatState++;
+        chatIsOpening = false;
+        activeText.text = savedText;
+        yield return null;
+    }
 }
