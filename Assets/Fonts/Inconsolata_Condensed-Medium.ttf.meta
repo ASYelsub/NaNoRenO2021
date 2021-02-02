@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 083f7fedee497429bbf59d2df5b62155
+guid: 902363bbacdc47c4e85ad6ab97b9c63d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Roses are FF0000
+  fontName: Inconsolata Condensed
   fontNames:
-  - Roses are FF0000
+  - Inconsolata Condensed
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

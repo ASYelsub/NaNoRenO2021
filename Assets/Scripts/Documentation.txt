@@ -1,0 +1,34 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Documentation for NaNoRenO2021
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Code:
+
+-All game objects that the player can interact with are under the Canvas object.
+
+-The LeftBar - Panel object holds all the buttons to navigate to different channels. This object and its childeren interact with the SidePanel and 
+LeftButtonPress scripts.
+
+-With the Data Panel array in the Left Button Press script, the order of the array should be, which correspond to the left buttons:
+						Information
+						Profiles
+						s: The Founders
+						u: keeperofFeederof
+						u: zman70
+						u: reach0000000000
+						Submissions
+						c: zman70, reach00000...
+						c: zman70, keeperofFe...
+						c: keeperofFeederof, r...
+
+
+-With the button press in Open Profile, eve is 0, zephyr is 1, charlemagne is 2
+
+Design:
+
+s: notates "server" channel, a chat space with more than 2 users
+u: notates "user" channel, a chat space where you speak to one other user
+c: notates a "chat" channel, a chat space where you cannot chat but watch two users speak to each other in their mutual "u:" channels.
+
+You have access to c: channels because you are the administrator of the software and a robot.
