@@ -25,6 +25,10 @@ LeftButtonPress scripts.
 
 -With the button press in Open Profile, eve is 0, zephyr is 1, charlemagne is 2
 
+-A "chat" object is what displays all the "messages" depending on which button is pressed on the left
+and depending on what part of the story the player is in, which is dependent on the "entries"
+label in the left buttons.
+
 Design:
 
 s: notates "server" channel, a chat space with more than 2 users
