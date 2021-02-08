@@ -5328,7 +5328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23379c979e296154ab676d92206e13bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profileMoveSpeed: 0.5
+  profileMoveSpeed: 0.003
+  profileFadeSpeed: 0.01
+  profileExpandSpeed: 0.01
   profilePressSound: {fileID: 8300000, guid: fcea628fc057beb49a293e6cbdc23b38, type: 3}
   profilePanel:
   - {fileID: 1742588022}

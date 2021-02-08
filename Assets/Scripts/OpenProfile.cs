@@ -8,6 +8,10 @@ public class OpenProfile : MonoBehaviour{
     [Header("Tuning Variables")]
     [SerializeField]
     private float profileMoveSpeed; //I'd keep it around .5
+    [SerializeField]
+    private float profileFadeSpeed;
+    [SerializeField]
+    private float profileExpandSpeed;
 
     [SerializeField]
     private AudioClip profilePressSound;
@@ -150,7 +154,7 @@ public class OpenProfile : MonoBehaviour{
             c.a = alpha;
             imageC.a = alpha;
             textC.a = alpha;
-            timer = timer + .01f;
+            timer += profileFadeSpeed;
             nonClickedPanel[0].GetComponent<Image>().color = c;
             nonClickedPanel[1].GetComponent<Image>().color = c;
             nonClickedProfileImages[0].GetComponent<Image>().color = imageC;
@@ -188,7 +192,7 @@ public class OpenProfile : MonoBehaviour{
         if (profileIDClicked != 0)
         {
             increment = Mathf.Abs(finalPos.y / initialPos.y);
-            Debug.Log(increment);
+            //Debug.Log(increment);
             float timer = 0;
             while (timer < 1)
             {
@@ -197,7 +201,7 @@ public class OpenProfile : MonoBehaviour{
                     profilePanel[profileIDClicked].GetComponent<RectTransform>().localPosition = Vector3.Lerp(initialPos, finalPos, timer);
                 else
                     profilePanel[profileIDClicked].GetComponent<RectTransform>().localPosition = Vector3.Lerp(finalPos, initialPos, timer);
-                timer += Time.deltaTime * increment * profileMoveSpeed;
+                timer += profileMoveSpeed * increment;
                 yield return null;
             }
         }
@@ -225,7 +229,7 @@ public class OpenProfile : MonoBehaviour{
                 profilePanel[profileIDClicked].GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(initialSize, finalSize, timer);
             else
                 profilePanel[profileIDClicked].GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(finalSize, initialSize, timer);
-            timer += 0.01f;
+            timer += profileExpandSpeed;
             yield return null;
         }
         if (inverse)

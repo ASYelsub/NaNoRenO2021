@@ -40,7 +40,7 @@ public class SidePanelControl : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.F))
         {
             if(leftChatState < leftChatButton.Length && !chatIsOpening)
             StartCoroutine(addLeftChat(leftChatState));
