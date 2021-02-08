@@ -65,7 +65,7 @@ public class SidePanelControl : MonoBehaviour
             {
                 coverPanel.GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(size2, new Vector2(size2.x, size2.y - 80), timer2);
             }
-            timer2 = timer2 + coverPanelSpeed * Time.deltaTime;
+            timer2+= coverPanelSpeed;
             yield return null;
         }
 
@@ -82,7 +82,7 @@ public class SidePanelControl : MonoBehaviour
         {
             // TODO: come back to figuring out how to expand from left
             leftChatButton[activatingThis].GetComponent<RectTransform>().sizeDelta = Vector3.Lerp(new Vector2(0,rt.sizeDelta.y),size, timer);
-            timer = timer + leftChatSpeed * Time.deltaTime;
+            timer += leftChatSpeed;
             yield return null;
         }
         StartCoroutine(TypeWrite(savedText, activeText));
